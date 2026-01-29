@@ -1,123 +1,258 @@
-# TravelTrade Server 🚀
+# 💰 TravelTrade Server - P2P Logistics Backend
 
-The robust backend engine powering the TravelTrade platform.
+A robust and secure backend API for TravelTrade, powering the peer-to-peer logistics and travel platform. Built with Node.js, Express, TypeScript, and MongoDB.
 
-## Table of Contents 📖
+## 🌐 Live URL
 
-- [About the Project](#about-the-project)
-- [Project Overview](#project-overview)
-- [Key Features](#key-features)
-- [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Team Overview](#team-overview)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- **Backend API:** [https://travel-trade-server.vercel.app](https://travel-trade-server.vercel.app)
+- **API Documentation:** `/api/v1`
 
-## About the Project 📃
+---
 
-TravelTrade Server is the backbone of the TravelTrade ecosystem. It handles all business logic, data persistence, and secure transaction processing. Built with scalability and performance in mind, it ensures that shoppers and travelers have a seamless experience.
+## 🎯 Overview
 
-The server provides a comprehensive RESTful API that manages user authentication, product listings, bidding processes, and payment integrations, maintaining data integrity and security at every step.
+TravelTrade Server is a production-ready RESTful API that handles all business logic, data persistence, and secure transaction processing for the TravelTrade ecosystem. It supports role-based access for Users (Senders/Travelers) and Admins, manages secure payments, and handles real-time bidding operations.
 
-## Project Overview 📊
+### Key Highlights
 
-Summarize the project objectives, key metrics, and relevant statistics.
+- ✅ **Role-Based Access Control** - Secure endpoints for Travelers, Senders, and Admins
+- ✅ **Secure Authentication** - JWT-based auth with Firebase verification
+- ✅ **Real-Time Bidding** - Efficient handling of parcel requests and traveler offers
+- ✅ **Safe Transactions** - Integrated Stripe & SSLCommerz payment gateways
+- ✅ **Chat System** - Backend support for messaging
+- ✅ **Scalable Architecture** - Modular controller-service pattern
+- ✅ **Input Validation** - Robust data validation
+- ✅ **Database Design** - Optimized MongoDB schemas
 
-- **Objective:** To provide a secure, scalable, and efficient backend infrastructure for the TravelTrade client.
-- **Performance:** Optimized for low latency and high concurrency.
-- **Security:** Implements industry-standard security practices for data protection.
-- **Deployment:** Hosted on Vercel/Render.
+---
 
-## ✨ Key Features
+## 🚀 Features
 
-#### 1. **RESTful API**
+### 🔐 Authentication & Authorization
 
-- **Comprehensive Endpoints**: Covers all aspects of the application including Users, Products, Bids, and Reviews.
-- **Standardized Responses**: Consistent success and error response formats for easy frontend integration.
+- **JWT Authentication** - Secure token-based access
+- **Role Management** - Custom middleware for role verification
+- **Social Auth Support** - Integration with Firebase Auth
+- **User Verification** - Account status (verified/unverified) handling
 
-#### 2. **Authentication & Authorization**
+### 💸 Transaction System
 
-- **Secure Access**: JWT-based authentication combined with Firebase verification.
-- **Role-Based Control**: Middleware to restrict access based on user roles (Admin, User).
+- **Bidding Engine** - Manage bids, accept/reject logic
+- **Payment Processing** - Handle payment intents and webhooks
+- **Wallet Management** - Track earnings and withdrawals
+- **Order creation** - Secure order generation upon bid acceptance
 
-#### 3. **Payment Processing**
+### 📦 Logistics Management
 
-- **Multi-Gateway Support**: Integrated with Stripe and SSLCommerz for flexible payment options.
-- **Transaction Management**: Secure handling of payment intents and webhooks.
+- **Parcel Requests** - CRUD operations for shipment requests
+- **Travel Plans** - CRUD operations for trip postings
+- **Matching Algorithm** - Logic to match parcels with suitable travelers
+- **Status Tracking** - Update and retrieve shipment status
 
-#### 4. **Data Management**
+### 👥 User Management
 
-- **MongoDB Integration**: Flexible and scalable schema design using Mongoose/Native Driver.
-- **Efficient Queries**: Optimized database queries for fast data retrieval.
+- **Profile Updates** - Manage user details and preferences
+- **Admin Controls** - User ban/unban, role modifications
+- **Review System** - Handle ratings and text reviews
 
-#### 5. **Bidding Logic**
+### 📊 Admin Tools
 
-- **Real-time Updates**: Backend logic to handle bid placement, acceptance, and rejection.
-- **Validation**: Ensures all bids meet criteria before processing.
+- **Dashboard Analytics** - Aggregated data for platform insights
+- **Dispute Resolution** - Endpoint support for managing conflicts
+- **Financial Overview** - Track total transactions and revenue
 
-## Tech Stack 🛠️
+---
 
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Database:** MongoDB
-- **Authentication:** JSON Web Tokens (JWT), Firebase Admin SDK
-- **Payment SDKs:** Stripe, SSLCommerz
+## 🛠️ Tech Stack
 
-## Installation ⚙️
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| **Node.js** | JavaScript runtime | Latest LTS |
+| **Express.js** | Web framework | v4.21.x |
+| **MongoDB** | NoSQL database | v6.x |
+| **Mongoose** | ODM for MongoDB | v8.x |
+| **JWT** | Authentication tokens | v9.x |
+| **Stripe** | Payment processing | v17.x |
+| **SSLCommerz** | Local payment gateway | Integrated |
+| **Firebase Admin** | Auth verification | Latest |
+| **Axios** | External requests | v1.9.x |
+| **Cors** | Cross-origin resource sharing | v2.8.x |
+| **Dotenv** | Environment variables | v16.x |
 
-Clone the repo and install dependencies:
+---
 
-```bash
-git clone <repository-url>
-cd TravelTrade/TravelTrade-Server
-npm install
+## 📁 Project Structure
+
+```
+TravelTrade-Server/
+├── src/
+│   ├── config/           # App configuration (DB, Stripe, etc.)
+│   ├── controllers/      # Request handlers
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   ├── travelPostController.js
+│   │   ├── bidController.js
+│   │   ├── paymentController.js
+│   │   └── ...
+│   ├── models/           # Mongoose schemas
+│   │   ├── User.js
+│   │   ├── TravelPost.js
+│   │   ├── Order.js
+│   │   └── ...
+│   ├── routes/           # API routes definition
+│   │   ├── authRoutes.js
+│   │   ├── userRoutes.js
+│   │   ├── travelRoutes.js
+│   │   └── ...
+│   ├── middleware/       # Custom middleware (Auth, Error handling)
+│   ├── utils/            # Utility functions
+│   ├── index.js          # App entry point
+│   └── app.js            # Express app setup
+├── .env                  # Environment variables
+├── package.json
+└── README.md
 ```
 
-Set up environment variables by creating a `.env` file in the root directory:
+---
+
+## 🚦 API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/v1/auth/register` | Register new user | ❌ |
+| POST | `/api/v1/auth/login` | User login | ❌ |
+| GET | `/api/v1/auth/me` | Get current user | ✅ |
+
+### User Operations
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/v1/users` | Get all users (Admin) | ✅ |
+| PATCH | `/api/v1/users/profile` | Update profile | ✅ |
+
+### Travel Requests
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/v1/travel-posts` | Create travel plan | ✅ |
+| GET | `/api/v1/travel-posts` | Get available trips | ❌ |
+
+### Bidding
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/v1/bids` | Place a bid | ✅ |
+| GET | `/api/v1/bids/my-bids` | Get user bids | ✅ |
+| PATCH | `/api/v1/bids/:id/accept` | Accept a bid | ✅ |
+
+### Payments
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | `/api/v1/create-payment-intent` | Intiial payment | ✅ |
+| POST | `/api/v1/withdraw` | Withdraw earnings | ✅ |
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file in the root directory:
 
 ```env
-DB_USER=your_db_user
-DB_PASS=your_db_password
+# Server Configuration
 PORT=5000
-STRIPE_SECRET_KEY=your_stripe_secret
-FRONTEND_URL=http://localhost:5173
-BACKEND_URL=http://localhost:9000
+NODE_ENV=development
+
+# Database
+DB_URL=mongodb+srv://<user>:<password>@cluster.mongodb.net/traveltrade
+
+# JWT Secrets
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=7d
+
+# Payment Gateways
+STRIPE_SECRET_KEY=sk_test_...
 SSLCOMMERZ_STORE_ID=your_store_id
-SSLCOMMERZ_STORE_PASSWORD=your_store_password
+SSLCOMMERZ_STORE_PASSWORD=your_store_pass
+SSLCOMMERZ_IS_SANDBOX=true
+
+# Frontend URL (for CORS)
+FRONTEND_URL=http://localhost:5173
 ```
 
-Run the application:
+---
 
-```bash
-npm run dev
-```
+## 🚀 Getting Started
 
-## Team Overview 👥
+### Prerequisites
 
-Our team is dedicated to building the best P2P logistics platform.
+- Node.js (v18 or higher)
+- MongoDB (Atlas or Local)
+- npm or yarn
 
-| Name | Role | Contributions |
-| :--- | :--- | :--- |
-| **TravelTrade Team** | **Backend Engineers** | API Design, Database Architecture, Security |
+### Installation
 
-*Contributors information placeholder.*
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/TravelTrade.git
+   cd TravelTrade/TravelTrade-Server
+   ```
 
-## Contributing 🤝
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Contributions are what make the open-source community an amazing place!
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-### Steps to contribute:
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
 
-- Fork the Project
-- Create a branch (`git checkout -b feature/AmazingFeature`)
-- Commit changes (`git commit -m 'Add some AmazingFeature'`)
-- Push the branch (`git push origin feature/AmazingFeature`)
-- Open a Pull Request
+The server will start on `http://localhost:5000`
 
+---
 
-## Contact 📬
+## 🔒 Security Best Practices
 
-**🔗 Live URL:** [TravelTrade Server](https://travel-trade-server.vercel.app/)
+1. **Environment Variables** - Never commit `.env` files
+2. **JWT** - Secure token handling and verification
+3. **Input Validation** - Prevention of injection attacks
+4. **CORS** - Restricted to allowlisted origins
+5. **Secure Payments** - Implementation of standard payment protocols
 
-Project Link: [TravelTrade Repo](https://github.com/your-username/TravelTrade)
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## � License
+
+This project is licensed under the ISC License.
+
+---
+
+## 👨💻 Author
+
+**TravelTrade Team**
+- GitHub: [Your Profile](https://github.com/yourusername)
+
+---
+
+## 📞 Support
+
+For support, email support@traveltrade.com.
